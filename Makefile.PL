@@ -3,7 +3,7 @@ use ExtUtils::MakeMaker;
 # the contents of the Makefile that is written.
 WriteMakefile(
   'NAME'     => 'GD::Graph::XY',
-  'VERSION'  => '0.91', 
+  'VERSION'  => '0.92', 
   'DISTNAME' => 'GDGraph-XY',
   ($] ge '5.005') ? 
   (

@@ -211,6 +211,13 @@ sub draw_x_ticks_number
 
 		my ($x, $y) = $self->val_to_pixel($x_val, 0, 1);
 
+    if (defined $self->{x_number_format})
+    {
+      $x_val = ref $self->{x_number_format} eq 'CODE' ?
+        &{$self->{x_number_format}}($x_val) :
+        sprintf($self->{x_number_format}, $x_val);
+    } 
+    
 		$y = $self->{bottom} unless $self->{zero_axis_only};
 
 		# CONTRIB  Damon Brodie for x_tick_offset
@@ -416,7 +423,24 @@ See GD::Graph documentation for options for all graphs.
 
 =head2 Options for graphs with axes
 
-See GD::Graph documentation for options for all graphs.
+See GD::Graph documentation for options for graphs with axes.
+
+=head1 CHANGE LOG
+
+=head2 GDGraph-XY-0.92
+
+B<x_number_format>
+
+Added x_number_format functionality that mimics y_number_format
+at the request of Ramon Acedo Rodriguez E<lt>rar@same-si.com<gt>
+
+=head2 GDGraph-XY-0.91
+
+B<Pass -w>
+
+Thanks to some contributions by Andrew Crabb, ahc@sol.jhoc1.jhmi.edu,
+the modules now pass the -w. Yes, they should have done this in the
+first place, but I forgot. 
 
 =head1 AUTHOR
 

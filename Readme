@@ -1,6 +1,6 @@
 NAME
 
-  GD::Graph::XY v0.91
+  GD::Graph::XY v0.92
 
 DESCRIPTION
 
@@ -22,13 +22,13 @@ INSTALlATION
     GD >= 1.18
     GD::Graph >= 1.30,
 
-  WIN32 (GDGraph-XY-0.91.zip)
+  WIN32 (GDGraph-XY-0.92.zip)
 
     Extract zip file into a directory and type
 
     ppm install GDGraph-XY.ppd
 
-  UN*X (GDGraph-XY-0.91.tar.gz)
+  UN*X (GDGraph-XY-0.92.tar.gz)
 
     Extract bundle into a directory and type
 

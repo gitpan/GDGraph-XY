@@ -35,7 +35,8 @@ $my_graph = new GD::Graph::xypoints(600,400);
 $my_graph->set(
 	title		=> 'I am the Walrus',
 	x_label	=> 'Monkey',
-	y_label	=> 'Donkey'
+	y_label	=> 'Donkey',
+	x_number_format	=> "\$%.2f"
 );
 
   $gd = $my_graph->plot(\@data);
@@ -47,11 +48,29 @@ print IMG $gd->png;
 
 $my_graph = new GD::Graph::xylinespoints(600,400);
 
+sub x_format
+{
+    my $value = shift;
+    my $ret;
+
+    if ($value >= 0)
+    {
+        $ret = "Up '$value'";
+    }
+    else
+    {
+        $ret = "Down '$value'";
+    }
+
+    return $ret;
+}
+
 $my_graph->set(
 	title		=> 'I am the Walrus',
 	x_label	=> 'Monkey',
-	y_label	=> 'Donkey'
-	);
+	y_label	=> 'Donkey',
+	x_number_format	=> \&x_format
+  );
 
 $gd = $my_graph->plot(\@data);
 
