@@ -11,7 +11,7 @@
 
 package GD::Graph::xypoints;
 
-$GD::Graph::xypoints::VERSION = '$Revision: 1.9 $' =~ /\s([\d.]+)/;
+$GD::Graph::xypoints::VERSION = '$Revision: 1.10 $' =~ /\s([\d.]+)/;
 
 use strict;
  
@@ -87,21 +87,23 @@ sub set_max_min
   
   for my $i ( 1 .. $self->{_data}->num_sets )	# 1 because x-labels are [0]
   {
-    for my $j ( 0 .. $self->{_data}->num_points )
+    # Contributed by Andrew Crabb - ahc@sol.jhoc1.jhmi.edu
+    my $num_points_limit = $self->{_data}->num_points - 1;
+    for my $j ( 0 .. $num_points_limit )
     {
-      $y_max = $self->{_data}->[$i][$j] 
-        if (($self->{_data}->[$i][$j] > $y_max) or (not defined $y_max));
-      $y_min = $self->{_data}->[$i][$j]
-        if (($self->{_data}->[$i][$j] < $y_min) or (not defined $y_min));		
+      my $val = $self->{_data}->[$i][$j];
+      $y_max = $val if ((not defined($y_max)) or ($val > $y_max));
+      $y_min = $val if ((not defined($y_min)) or ($val < $y_min));
     }
   }
 
-  for my $k ( 0 .. $self->{_data}->num_points ) # x-values are at [0]
+  # Contributed by Andrew Crabb - ahc@sol.jhoc1.jhmi.edu
+  my $num_points_limit = $self->{_data}->num_points - 1;
+  for my $k ( 0 .. $num_points_limit ) # x-values are at [0]
   {
-    $x_max = $self->{_data}->[0][$k] 
-      if ($self->{_data}->[0][$k] > $x_max);
-    $x_min = $self->{_data}->[0][$k]
-      if ($self->{_data}->[0][$k] < $x_min);		
+    my $val = $self->{_data}->[0][$k];
+    $x_max = $val if ((not defined($x_max)) or ($val > $x_max));
+    $x_min = $val if ((not defined($x_min)) or ($val < $x_min));
   }
 
   # Set the min and max's
@@ -456,9 +458,15 @@ See GD::Graph documentation for options for all graphs.
 
 See GD::Graph documentation for options for all graphs.
 
-=head1 AUTHOR
+=head1 CHANGE LOG
 
-Written by:             Martien Verbruggen
+=head2 GDGraph-XY-0.91
+
+B<Pass -w>
+
+Thanks to some contributions by Andrew Crabb, ahc@sol.jhoc1.jhmi.edu,
+the modules now pass the -w. Yes, they should have done this in the
+first place, but I forgot. 
 
 =head1 AUTHOR
 
